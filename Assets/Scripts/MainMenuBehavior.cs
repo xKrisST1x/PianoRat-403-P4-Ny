@@ -5,17 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuBehavior : MonoBehaviour
 {
-    public void startButton()
+    public void PlayButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    public void settingsButton()
+    public void SettingsButton()
     {
         // Hide/unhide Settings overlay
     }
 
-    public void quitButton()
+    public void QuitButton()
     {
         Application.Quit();
     }
