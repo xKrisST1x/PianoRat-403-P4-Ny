@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,7 +7,7 @@ using UnityEngine.Events;
 namespace PianoRun.Player {
 
 
-[RequireComponent(typeof(CharacterController), typeof(PlayerInput), typeof(Animator))]
+[RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +25,10 @@ public class PlayerController : MonoBehaviour
    private LayerMask groundLayer;
    [SerializeField]
    private LayerMask turnLayer;
+   [SerializeField]
+   private Animator animator;
+   [SerializeField]
+   private AnimationClip slideAnimationClip;
 
 
    private float playerSpeed;
@@ -38,7 +42,6 @@ public class PlayerController : MonoBehaviour
    private InputAction slideAction;
 
    private CharacterController controller;
-   private Animator animator; 
 
    private int slidingAnimationId;
 
@@ -51,7 +54,6 @@ public class PlayerController : MonoBehaviour
    {
     playerInput = GetComponent<PlayerInput>();
     controller = GetComponent<CharacterController>();
-    animator = GetComponent<Animator>();
 
     slidingAnimationId = Animator.StringToHash("Sliding");
 
@@ -129,8 +131,27 @@ public class PlayerController : MonoBehaviour
     {
         if(!sliding && IsGrounded())
         {
-            
+            StartCoroutine(Slide());
         }
+    }
+
+    private IEnumerator Slide()
+    {
+        sliding = true;
+        // shrinks collider
+        Vector3 originalControllerCenter = controller.center;
+        Vector3 newControllerCenter = originalControllerCenter;
+        controller.height /= 2;
+        newControllerCenter.y -= controller.height / 2;
+        controller.center = newControllerCenter;
+        
+        // plays slide animation
+        animator.Play(slidingAnimationId);
+        yield return new WaitForSeconds(slideAnimationClip.length);
+        // sets the character controller collider back to normal after sliding
+        controller.height *= 2;
+        controller.center = originalControllerCenter;
+        sliding = false;
     }
 
     private void PlayerJump(InputAction.CallbackContext context)
@@ -165,8 +186,8 @@ public class PlayerController : MonoBehaviour
         raycastOriginFirst -= transform.forward * .2f;
         raycastOriginSecond += transform.forward * .2f;
 
-        Debug.DrawLine(raycastOriginFirst, Vector3.down, Color.green, 2f);
-        Debug.DrawLine(raycastOriginSecond, Vector3.down, Color.red, 2f);
+        //Debug.DrawLine(raycastOriginFirst, Vector3.down, Color.green, 2f);
+        //Debug.DrawLine(raycastOriginSecond, Vector3.down, Color.red, 2f);
 
         if(Physics.Raycast(raycastOriginFirst, Vector3.down, out RaycastHit hit, length, groundLayer) || 
         Physics.Raycast(raycastOriginSecond, Vector3.down, out RaycastHit hit2, length, groundLayer))
