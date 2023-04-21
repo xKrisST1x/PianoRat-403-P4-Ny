@@ -71,7 +71,7 @@ public class TileSpawner : MonoBehaviour
     public void AddNewDirection(Vector3 direction)
     {
         currentTileDirection = direction;
-        DeletePreviousTile(); // evt brug object pooling istedet for til instansiate, for at spare computerkraft.
+        DeletePreviousTile(); // evt brug object pooling istedet for til instantiate, for at spare computerkraft.
 
         Vector3 tilePlacementScale;
         if(prevTile.GetComponent<Tile>().type == TileType.SIDEWAYS)
