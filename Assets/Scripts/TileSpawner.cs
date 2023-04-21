@@ -5,7 +5,6 @@ using UnityEngine;
 namespace PianoRun
 {
 
-
 public class TileSpawner : MonoBehaviour
 {
    [SerializeField]
@@ -48,17 +47,15 @@ public class TileSpawner : MonoBehaviour
 
     private void SpawnTile(Tile tile, bool spawnObstacle = false)// Remove spawnobstacles later?
     {
-        Quaternion newTileRotation = tile.gameObject.transform.rotation * Quaternion.LookRotation(currentTileDirection, Vector3.up);
+        Quaternion newTileRotation = tile.gameObject.transform.rotation * 
+        Quaternion.LookRotation(currentTileDirection, Vector3.up);
 
         prevTile = GameObject.Instantiate(tile.gameObject, currentTileLocation, newTileRotation);
         currentTiles.Add(prevTile);
 
-
-
         if(tile.type == TileType.STRAIGHT)
         currentTileLocation += Vector3.Scale(prevTile.GetComponent<Renderer>().bounds.size, 
         currentTileDirection);
-        
     }
 
     private void DeletePreviousTile()
