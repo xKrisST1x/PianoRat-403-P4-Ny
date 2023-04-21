@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 namespace PianoRun.Player {
 
-
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 
 public class PlayerController : MonoBehaviour
@@ -26,10 +25,11 @@ public class PlayerController : MonoBehaviour
    [SerializeField]
    private LayerMask turnLayer;
    [SerializeField]
+   private LayerMask gameOverLayer;
+   [SerializeField]
    private Animator animator;
    [SerializeField]
    private AnimationClip slideAnimationClip;
-
 
    private float playerSpeed;
    private float gravity;
@@ -47,6 +47,8 @@ public class PlayerController : MonoBehaviour
 
    private bool sliding = false;
 
+   private bool gameOver = false;
+
    [SerializeField]
    private UnityEvent<Vector3> turnEvent;
 
@@ -60,8 +62,6 @@ public class PlayerController : MonoBehaviour
     turnAction = playerInput.actions["Turn"];
     jumpAction = playerInput.actions["Jump"];
     slideAction = playerInput.actions["Slide"];
-
-    
    }
 
    private void OnEnable() 
@@ -69,7 +69,6 @@ public class PlayerController : MonoBehaviour
     turnAction.performed += PlayerTurn;
     slideAction.performed += PlayerSlide;
     jumpAction.performed += PlayerJump;
-
    }
 
    private void OnDisable() 
@@ -78,6 +77,7 @@ public class PlayerController : MonoBehaviour
     slideAction.performed -= PlayerSlide;
     jumpAction.performed -= PlayerJump;    
    }
+
     private void Start()
     {
         playerSpeed = initialPlayerSpeed;
@@ -92,9 +92,9 @@ public class PlayerController : MonoBehaviour
         return;
        }
        Vector3 targetDirection = Quaternion.AngleAxis(90 * context.ReadValue<float>(), Vector3.up) *
-         movementDirection;
-        turnEvent.Invoke(targetDirection);
-        Turn(context.ReadValue<float>(), turnPosition.Value);
+       movementDirection;
+       turnEvent.Invoke(targetDirection);
+       Turn(context.ReadValue<float>(), turnPosition.Value);
     }
 
     private Vector3? CheckTurn(float turnValue) // questionmark is called "nullable" and means that it can either be Vector3 or null.
@@ -171,9 +171,17 @@ public class PlayerController : MonoBehaviour
         {
             playerVelocity.y = 0f;
         } 
-
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (gameOver == true)
+        {
+            Debug.Log("Dead");
+        }
+        else
+        {
+            Debug.Log("Alive");
+        }
     }
 
     private bool IsGrounded(float length = .2f)
@@ -198,6 +206,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-}
-
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.layer == gameOverLayer)
+            {
+                gameOver = true;
+            }
+        }
+    }
 }
