@@ -174,6 +174,11 @@ public class PlayerController : MonoBehaviour
         playerVelocity.y += gravity * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
 
+        if(playerSpeed < maximumPlayerSpeed)
+        {
+            playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
+        }
+
         if (gameOver == true)
         {
             Debug.Log("Dead");

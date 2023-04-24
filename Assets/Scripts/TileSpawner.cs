@@ -13,8 +13,12 @@ public class TileSpawner : MonoBehaviour
    private int minimunStraightTile = 3;
    [SerializeField]
    private int maximumStraightTile = 15; 
+
    [SerializeField]
    private GameObject startingTile;
+
+   //public GameObject[] startingTile;
+
    [SerializeField]
    private List<GameObject> turnTiles;
    [SerializeField]
