@@ -13,6 +13,7 @@ public class speedScriptSofie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (playerSpeed < maximumPlayerSpeed)
         {
             playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
@@ -24,5 +25,6 @@ public class speedScriptSofie : MonoBehaviour
             }
             //ændre op i animator script!!!!!
         }
+        */
     }
 }
