@@ -1832,8 +1832,7 @@ GameObject:
   - component: {fileID: 1982780080}
   - component: {fileID: 1982780079}
   - component: {fileID: 1982780078}
-  - component: {fileID: 1982780083}
-  - component: {fileID: 1982780084}
+  - component: {fileID: 1982780081}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -1906,7 +1905,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1982780083
+--- !u!114 &1982780081
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1915,7 +1914,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982780076}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c876dc09c6379b46b68857d7b8936cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 9c42ac0d92b94444fb2fcdbd780c459f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   initialPlayerSpeed: 4
@@ -1936,28 +1935,4 @@ MonoBehaviour:
   slideAnimationClip: {fileID: 7400000, guid: 839c72530968a8841ac49ddfcf1e31c7, type: 2}
   turnEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1689678931}
-        m_TargetAssemblyTypeName: PianoRun.TileSpawner, Assembly-CSharp
-        m_MethodName: AddNewDirection
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &1982780084
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982780076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d444ba0577092ef4a849f8f77647ebf2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+      m_Calls: []

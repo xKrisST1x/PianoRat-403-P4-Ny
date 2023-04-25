@@ -8,7 +8,7 @@ namespace PianoRun.Player {
 
     [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 
-    public class PlayerController : MonoBehaviour
+    public class PlayerControllerBackup : MonoBehaviour
     {
         [SerializeField]
         private float initialPlayerSpeed = 4f;
