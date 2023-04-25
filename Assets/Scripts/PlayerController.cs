@@ -45,8 +45,6 @@ namespace PianoRun.Player {
 
         private bool sliding = false;
 
-        private bool gameOver = false;
-
         [SerializeField]
         private UnityEvent<Vector3> turnEvent;
 
