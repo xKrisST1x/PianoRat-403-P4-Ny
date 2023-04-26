@@ -11,6 +11,8 @@ namespace PianoRun.Player {
 
     public class PlayerControllerBackup : MonoBehaviour
     {
+        bool cTrue;
+
         [SerializeField]
         private float initialPlayerSpeed = 4f;
         [SerializeField]
@@ -109,6 +111,19 @@ namespace PianoRun.Player {
             gravity = initialGravityValue;
         }
 
+        private void PlayerChordTurn(float context)
+        {
+            Vector3? turnPosition = CheckTurn(context);
+            if (!turnPosition.HasValue)
+            {
+                return;
+            }
+            Vector3 targetDirection = Quaternion.AngleAxis(90 * context, Vector3.up) *
+            movementDirection;
+            turnEvent.Invoke(targetDirection);
+            Turn(context, turnPosition.Value);
+        }
+
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             Vector3? turnPosition = CheckTurn(context.ReadValue<float>());
@@ -193,14 +208,14 @@ namespace PianoRun.Player {
 
         private void Update()
         {
-            C1 = MidiMaster.GetKey(48);
+            C1 = MidiMaster.GetKey(48); //
             Cs1 = MidiMaster.GetKey(49);
             D1 = MidiMaster.GetKey(50);
             Ds1 = MidiMaster.GetKey(51);
-            E1 = MidiMaster.GetKey(52);
+            E1 = MidiMaster.GetKey(52); // 
             F1 = MidiMaster.GetKey(53);
             Fs1 = MidiMaster.GetKey(54);
-            G1 = MidiMaster.GetKey(55);
+            G1 = MidiMaster.GetKey(55); //
             Gs1 = MidiMaster.GetKey(56);
             A1 = MidiMaster.GetKey(57);
             As1 = MidiMaster.GetKey(58);
@@ -251,13 +266,25 @@ namespace PianoRun.Player {
             // Left turn, Chord C
             if (C1 > 0.0f && E1 > 0.0f && G1 > 0.0f)
             {
-                // Turn left
+                //Debug.Log("C");
             }
 
             //Right turn, Chord Am
             if (A1 > 0.0f && C2 > 0.0f && E2 > 0.0f)
             {
-                // Turn right 
+                Debug.Log("Am");
+            }
+
+            if (MidiMaster.GetKeyDown(48) && MidiMaster.GetKeyDown(52) && MidiMaster.GetKeyDown(55))
+            {
+                Debug.Log("C");
+                PlayerChordTurn(-1f);
+            }
+
+            if (MidiMaster.GetKeyDown(57) && MidiMaster.GetKeyDown(60) && MidiMaster.GetKeyDown(64))
+            {
+                Debug.Log("Am");
+                PlayerChordTurn(1f);
             }
         }
 

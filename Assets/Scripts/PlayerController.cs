@@ -159,6 +159,19 @@ namespace PianoRun.Player {
             }
         }
 
+        private void PlayerChordTurn(float context)
+        {
+            Vector3? turnPosition = CheckTurn(context);
+            if (!turnPosition.HasValue)
+            {
+                return;
+            }
+            Vector3 targetDirection = Quaternion.AngleAxis(90 * context, Vector3.up) *
+            movementDirection;
+            turnEvent.Invoke(targetDirection);
+            Turn(context, turnPosition.Value);
+        }
+
         private void Update()
         {
             controller.Move(transform.forward * playerSpeed * Time.deltaTime);
@@ -173,6 +186,16 @@ namespace PianoRun.Player {
             if (playerSpeed < maximumPlayerSpeed)
             {
                 playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
+            }
+
+            if (Input.GetKeyDown("q"))
+            {
+                PlayerChordTurn(-1f);
+            }
+
+            if(Input.GetKeyDown("e"))
+            {
+                PlayerChordTurn(1f);
             }
         }
 
