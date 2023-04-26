@@ -7,8 +7,9 @@ public enum TileType {
     STRAIGHT,
     LEFT,
     RIGHT,
-    SIDEWAYS,
-    STRAIGHTJUMPTEST
+    SIDEWAYS
+    //STRAIGHTJUMPTEST,
+    //STRAIGHTSLIDETEST
 }
 
 /// <summary>

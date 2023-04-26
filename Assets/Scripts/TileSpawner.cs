@@ -14,10 +14,11 @@ public class TileSpawner : MonoBehaviour
    [SerializeField]
    private int maximumStraightTile = 15; 
 
-   [SerializeField]
-   private GameObject startingTile;
+   //[SerializeField]
+   //private GameObject startingTile; original kode
 
-   //public GameObject[] startingTile;
+   [SerializeField]
+   private List<GameObject> startingTile;
 
    [SerializeField]
    private List<GameObject> turnTiles;
@@ -40,7 +41,8 @@ public class TileSpawner : MonoBehaviour
 
     for (int i = 0; i < tileStartCount; ++i)
     {
-        SpawnTile(startingTile.GetComponent<Tile>(), false);
+        //SpawnTile(startingTile.GetComponent<Tile>(), false); original kode
+        SpawnTile(SelectRandomGameObjectFromList(startingTile).GetComponent<Tile>(), false);
     }
 
     SpawnTile(SelectRandomGameObjectFromList(turnTiles).GetComponent<Tile>());
@@ -49,7 +51,7 @@ public class TileSpawner : MonoBehaviour
     //AddNewDirection(Vector3.left);
    }
 
-    private void SpawnTile(Tile tile, bool spawnObstacle = false)// Remove spawnobstacles later?
+    private void SpawnTile(Tile tile, bool spawnObstacle = false)// Remove spawnobstacles later?.
     {
         Quaternion newTileRotation = tile.gameObject.transform.rotation * 
         Quaternion.LookRotation(currentTileDirection, Vector3.up);
@@ -81,15 +83,15 @@ public class TileSpawner : MonoBehaviour
         if(prevTile.GetComponent<Tile>().type == TileType.SIDEWAYS)
         {
             tilePlacementScale = Vector3.Scale(prevTile.GetComponent<Renderer>().bounds.size / 2 + 
-            (Vector3.one * startingTile.GetComponent<BoxCollider>().size.z / 2), currentTileDirection);
+            (Vector3.one * SelectRandomGameObjectFromList(startingTile).GetComponent<BoxCollider>().size.z / 2), currentTileDirection); // ny "SelectRandomGameObjectFromList"
 
         } 
         else 
         {
             // left or right tiles
             tilePlacementScale = Vector3.Scale((prevTile.GetComponent<Renderer>().bounds.size - 
-            (Vector3.one * 2)) + (Vector3.one * startingTile.GetComponent<BoxCollider>().size.z / 2),
-             currentTileDirection);
+            (Vector3.one * 2)) + (Vector3.one * SelectRandomGameObjectFromList(startingTile).GetComponent<BoxCollider>().size.z / 2),
+             currentTileDirection); // ny "SelectRandomGameObjectFromList"
         }
 
         currentTileLocation += tilePlacementScale;
@@ -97,7 +99,7 @@ public class TileSpawner : MonoBehaviour
         int currentPathLength = Random.Range(minimunStraightTile, maximumStraightTile);
         for (int  i = 0; i < currentPathLength; ++i)
         {
-            SpawnTile(startingTile.GetComponent<Tile>(), (i == 0) ? false : true);
+            SpawnTile(SelectRandomGameObjectFromList(startingTile).GetComponent<Tile>(), (i == 0) ? false : true); // ny "SelectRandomGameObjectFromList"
         }
 
         SpawnTile(SelectRandomGameObjectFromList(turnTiles).GetComponent<Tile>(), false);
