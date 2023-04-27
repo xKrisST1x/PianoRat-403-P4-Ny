@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using MidiJack;
 
 namespace PianoRun.Player {
 
@@ -93,6 +94,19 @@ namespace PianoRun.Player {
             Turn(context.ReadValue<float>(), turnPosition.Value);
         }
 
+        private void PlayerChordTurn(float turnValue)
+        {
+            Vector3? turnPosition = CheckTurn(turnValue);
+            if (!turnPosition.HasValue)
+            {
+                return;
+            }
+            Vector3 targetDirection = Quaternion.AngleAxis(90 * turnValue, Vector3.up) *
+            movementDirection;
+            turnEvent.Invoke(targetDirection);
+            Turn(turnValue, turnPosition.Value);
+        }
+
         private Vector3? CheckTurn(float turnValue) // questionmark is called "nullable" and means that it can either be Vector3 or null.
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, .1f, turnLayer); // creates a sphere that checks if we are  overlapping with ant other colliders.
@@ -159,19 +173,6 @@ namespace PianoRun.Player {
             }
         }
 
-        private void PlayerChordTurn(float context)
-        {
-            Vector3? turnPosition = CheckTurn(context);
-            if (!turnPosition.HasValue)
-            {
-                return;
-            }
-            Vector3 targetDirection = Quaternion.AngleAxis(90 * context, Vector3.up) *
-            movementDirection;
-            turnEvent.Invoke(targetDirection);
-            Turn(context, turnPosition.Value);
-        }
-
         private void Update()
         {
             controller.Move(transform.forward * playerSpeed * Time.deltaTime);
@@ -188,12 +189,13 @@ namespace PianoRun.Player {
                 playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
             }
 
+            // PlayerChordTurn Left
             if (Input.GetKeyDown("q"))
             {
                 PlayerChordTurn(-1f);
             }
 
-            if(Input.GetKeyDown("e"))
+            if (Input.GetKeyDown("e"))
             {
                 PlayerChordTurn(1f);
             }

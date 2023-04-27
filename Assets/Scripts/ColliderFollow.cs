@@ -9,9 +9,6 @@ public class ColliderFollow : MonoBehaviour
     [SerializeField]
     GameObject gameOverlay;
 
-    [SerializeField]
-    LayerMask playerLayer;
-
     float yValue = -3f;
 
     void Update()
