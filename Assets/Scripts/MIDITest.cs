@@ -14,15 +14,15 @@ public class MIDITest : MonoBehaviour
     float Fs1; // 54
     float G1; // 55 -
     float Gs1; // 56
-    float A1; // 57
+    float A1; // 57 +
     float As1; // 58
     float B1; // 59
 
-    float C2; // 60
+    float C2; // 60 +
     float Cs2; // 61
     float D2; // 62
     float Ds2; // 63
-    float E2; // 64
+    float E2; // 64 +
     float F2; // 65
     float Fs2; // 66
     float G2; // 67
