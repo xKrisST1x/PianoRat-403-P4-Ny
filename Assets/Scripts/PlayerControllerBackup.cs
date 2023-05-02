@@ -49,6 +49,8 @@ namespace PianoRun.Player {
         [SerializeField]
         private UnityEvent<Vector3> turnEvent;
 
+        bool gamePaused;
+
         float turnFloat;
 
         float C1; // 48 -
@@ -126,17 +128,17 @@ namespace PianoRun.Player {
             Turn(context.ReadValue<float>(), turnPosition.Value);
         }
 
-        private void PlayerChordTurn(float turnValue)
+        private void PlayerChordTurn(float turnFloat)
         {
-            Vector3? turnPosition = CheckTurn(turnValue);
+            Vector3? turnPosition = CheckTurn(turnFloat);
             if (!turnPosition.HasValue)
             {
                 return;
             }
-            Vector3 targetDirection = Quaternion.AngleAxis(90 * turnValue, Vector3.up) *
+            Vector3 targetDirection = Quaternion.AngleAxis(90 * turnFloat, Vector3.up) *
             movementDirection;
             turnEvent.Invoke(targetDirection);
-            Turn(turnValue, turnPosition.Value);
+            Turn(turnFloat, turnPosition.Value);
         }
 
         private Vector3? CheckTurn(float turnValue) // questionmark is called "nullable" and means that it can either be Vector3 or null.
@@ -262,7 +264,7 @@ namespace PianoRun.Player {
                 turnFloat = 0f;
             }
 
-            if (MidiMaster.GetKeyDown(48) || MidiMaster.GetKeyDown(57))
+            if (MidiMaster.GetKeyDown(48) || MidiMaster.GetKeyDown(52) || MidiMaster.GetKeyDown(55) || MidiMaster.GetKeyDown(57) || MidiMaster.GetKeyDown(60) || MidiMaster.GetKeyDown(64))
             {
                 if (turnFloat != 0f)
                 {
@@ -270,6 +272,7 @@ namespace PianoRun.Player {
                 }
             }
 
+            /*
             // F chord, Jump
             if (F1 > 0.0f && A1 > 0.0f && C2 > 0.0f && IsGrounded())
             {
@@ -282,6 +285,7 @@ namespace PianoRun.Player {
             {
                 StartCoroutine(Slide());
             }
+            */
 
             // PlayerChordTurn Left
             if (Input.GetKeyDown("q"))
@@ -292,6 +296,22 @@ namespace PianoRun.Player {
             if (Input.GetKeyDown("e"))
             {
                 PlayerChordTurn(1f);
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            // F chord, Jump
+            if (F1 > 0.0f && A1 > 0.0f && C2 > 0.0f && IsGrounded())
+            {
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
+                controller.Move(playerVelocity * Time.deltaTime);
+            }
+
+            // G chord, slide
+            if (G1 > 0.0f && B1 > 0.0f && D2 > 0.0f && !sliding && IsGrounded())
+            {
+                StartCoroutine(Slide());
             }
         }
 
