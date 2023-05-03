@@ -251,6 +251,18 @@ namespace PianoRun.Player {
                 playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
             }
 
+            if (playerSpeed < maximumPlayerSpeed)
+            {
+                playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
+                gravity = initialGravityValue - playerSpeed;
+
+                if (animator.speed < 1.25f)
+                {
+                    animator.speed += (1 / playerSpeed) * Time.deltaTime;
+                }
+                //ændre op i animator script!!!!!
+            }
+
             if (C1 > 0.0f && E1 > 0.0f && G1 > 0.0f) // C chord, Left
             {
                 turnFloat = -1f;
