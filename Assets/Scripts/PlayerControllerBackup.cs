@@ -30,7 +30,9 @@ namespace PianoRun.Player {
         [SerializeField]
         private AnimationClip slideAnimationClip;
 
+        [SerializeField]
         private float playerSpeed;
+        [SerializeField]
         private float gravity;
         private Vector3 movementDirection = Vector3.forward;
         private Vector3 playerVelocity;
@@ -191,7 +193,7 @@ namespace PianoRun.Player {
 
             // plays slide animation
             animator.Play(slidingAnimationId);
-            yield return new WaitForSeconds(slideAnimationClip.length);
+            yield return new WaitForSeconds(slideAnimationClip.length / animator.speed);
             // sets the character controller collider back to normal after sliding
             controller.height *= 2;
             controller.center = originalControllerCenter;
@@ -249,18 +251,12 @@ namespace PianoRun.Player {
             if (playerSpeed < maximumPlayerSpeed)
             {
                 playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
-            }
-
-            if (playerSpeed < maximumPlayerSpeed)
-            {
-                playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
                 gravity = initialGravityValue - playerSpeed;
 
                 if (animator.speed < 1.25f)
                 {
                     animator.speed += (1 / playerSpeed) * Time.deltaTime;
                 }
-                //ændre op i animator script!!!!!
             }
 
             if (C1 > 0.0f && E1 > 0.0f && G1 > 0.0f) // C chord, Left
