@@ -28,6 +28,8 @@ namespace PianoRun.Player {
         [SerializeField]
         private Animator animator;
         [SerializeField]
+        private Animator ratAnimator;
+        [SerializeField]
         private AnimationClip slideAnimationClip;
 
         [SerializeField]
@@ -193,6 +195,7 @@ namespace PianoRun.Player {
 
             // plays slide animation
             animator.Play(slidingAnimationId);
+            ratAnimator.Play("Sliding");
             yield return new WaitForSeconds(slideAnimationClip.length / animator.speed);
             // sets the character controller collider back to normal after sliding
             controller.height *= 2;
@@ -256,6 +259,7 @@ namespace PianoRun.Player {
                 if (animator.speed < 1.25f)
                 {
                     animator.speed += (1 / playerSpeed) * Time.deltaTime;
+                    ratAnimator.speed += (1 / playerSpeed) * Time.deltaTime;
                 }
             }
 

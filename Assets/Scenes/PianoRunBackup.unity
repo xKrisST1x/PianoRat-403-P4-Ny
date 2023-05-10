@@ -2018,6 +2018,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   animator: {fileID: 689935529}
+  ratAnimator: {fileID: 5866666020098886931}
   slideAnimationClip: {fileID: 7400000, guid: 839c72530968a8841ac49ddfcf1e31c7, type: 2}
   playerSpeed: 0
   gravity: 0
@@ -2925,9 +2926,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5c884e8e8fe85064998cf528a0a21077, type: 3}
   m_Controller: {fileID: 9100000, guid: 465e00a6beed8444689a3477dccc9bbf, type: 2}
-  m_CullingMode: 1
+  m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

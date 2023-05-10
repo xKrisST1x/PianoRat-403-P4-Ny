@@ -304,7 +304,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4097165832917375904}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -624,7 +624,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5635246150992067340}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -796,10 +796,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SidewaysPipe
       objectReference: {fileID: 0}
+    - target: {fileID: 3507581957443174061, guid: 6df045928b6333e4998eba5494d18750, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c0c573c825d99245bd5dd27a261a35c, type: 2}
+    - target: {fileID: 5272716268329484966, guid: 6df045928b6333e4998eba5494d18750, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cac1ececf0772448b27fa3598464ba9, type: 2}
     - target: {fileID: 8547883065012118900, guid: 6df045928b6333e4998eba5494d18750, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 88503ef28c7940343a98c30471d7e2cf, type: 2}
+      objectReference: {fileID: 2100000, guid: 1e3393eb9d86ac64394d10aac63514b3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6df045928b6333e4998eba5494d18750, type: 3}
 --- !u!4 &5952068950579378610 stripped

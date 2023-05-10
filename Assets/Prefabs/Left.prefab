@@ -264,7 +264,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3504972824814534260}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -669,7 +669,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5489600363064275728}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -732,6 +732,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1886248315279132885}
     m_Modifications:
+    - target: {fileID: 1512975414434263425, guid: 72820d11e71b9094f92a7b08f776eb7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5cac1ececf0772448b27fa3598464ba9, type: 2}
     - target: {fileID: 2748574067654612130, guid: 72820d11e71b9094f92a7b08f776eb7b, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -795,7 +799,11 @@ PrefabInstance:
     - target: {fileID: 3276009392876119645, guid: 72820d11e71b9094f92a7b08f776eb7b, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 88503ef28c7940343a98c30471d7e2cf, type: 2}
+      objectReference: {fileID: 2100000, guid: 1e3393eb9d86ac64394d10aac63514b3, type: 2}
+    - target: {fileID: 4217250512155823665, guid: 72820d11e71b9094f92a7b08f776eb7b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1c0c573c825d99245bd5dd27a261a35c, type: 2}
     - target: {fileID: 5847537403222984898, guid: 72820d11e71b9094f92a7b08f776eb7b, type: 3}
       propertyPath: m_Name
       value: LeftPipe
