@@ -31,6 +31,8 @@ namespace PianoRun.Player {
         private Animator ratAnimator;
         [SerializeField]
         private AnimationClip slideAnimationClip;
+        [SerializeField]
+        GameObject gameOverlay;
 
         [SerializeField]
         private float playerSpeed;
@@ -113,7 +115,7 @@ namespace PianoRun.Player {
 
         private void Start()
         {
-            turnFloat = 0f;
+            Time.timeScale = 1f;
 
             playerSpeed = initialPlayerSpeed;
             gravity = initialGravityValue;
@@ -284,21 +286,6 @@ namespace PianoRun.Player {
                 }
             }
 
-            /*
-            // F chord, Jump
-            if (F1 > 0.0f && A1 > 0.0f && C2 > 0.0f && IsGrounded())
-            {
-                playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
-                controller.Move(playerVelocity * Time.deltaTime);
-            }
-
-            // G chord, slide
-            if (G1 > 0.0f && B1 > 0.0f && D2 > 0.0f && !sliding && IsGrounded())
-            {
-                StartCoroutine(Slide());
-            }
-            */
-
             // PlayerChordTurn Left
             if (Input.GetKeyDown("q"))
             {
@@ -347,6 +334,15 @@ namespace PianoRun.Player {
             }
             return false;
 
+        }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (hit.gameObject.tag == "GameOver") 
+            {
+                Time.timeScale = 0;
+                gameOverlay.SetActive(true);
+            }
         }
     }
 }

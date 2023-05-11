@@ -7,7 +7,7 @@ public class GameOverBehavior : MonoBehaviour
 {
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("PianoRunBackup");
         Time.timeScale = 1;
     }
 
