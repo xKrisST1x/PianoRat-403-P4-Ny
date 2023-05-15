@@ -33,6 +33,17 @@ namespace PianoRun.Player {
         private AnimationClip slideAnimationClip;
         [SerializeField]
         GameObject gameOverlay;
+        
+        [SerializeField]
+        AudioSource ratAudio;
+        [SerializeField]
+        AudioClip slideSound;
+        [SerializeField]
+        AudioClip jumpSound;
+        [SerializeField]
+        AudioClip leftSound;
+        [SerializeField]
+        AudioClip rightSound;
 
         [SerializeField]
         private float playerSpeed;
@@ -267,10 +278,12 @@ namespace PianoRun.Player {
 
             if (C1 > 0.0f && E1 > 0.0f && G1 > 0.0f) // C chord, Left
             {
+                ratAudio.PlayOneShot(leftSound);
                 turnFloat = -1f;
             }
             else if (A1 > 0.0f && C2 > 0.0f && E2 > 0.0f) // Am chord, Right
             {
+                ratAudio.PlayOneShot(rightSound);
                 turnFloat = 1f;
             }
             else
@@ -303,6 +316,7 @@ namespace PianoRun.Player {
             // F chord, Jump
             if (F1 > 0.0f && A1 > 0.0f && C2 > 0.0f && IsGrounded())
             {
+                ratAudio.PlayOneShot(jumpSound);
                 playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
                 controller.Move(playerVelocity * Time.deltaTime);
             }
@@ -310,6 +324,7 @@ namespace PianoRun.Player {
             // G chord, slide
             if (G1 > 0.0f && B1 > 0.0f && D2 > 0.0f && !sliding && IsGrounded())
             {
+                ratAudio.PlayOneShot(slideSound);
                 StartCoroutine(Slide());
             }
         }

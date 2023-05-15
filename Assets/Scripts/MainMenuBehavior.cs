@@ -8,7 +8,12 @@ public class MainMenuBehavior : MonoBehaviour
     [SerializeField]
     Animator ratAnim;
 
-    void Start()
+    void Update()
+    {
+        StartDance();
+    }
+
+    void StartDance()
     {
         ratAnim.Play("Dance");
     }
