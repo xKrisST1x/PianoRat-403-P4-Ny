@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1910,7 +1910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85b0575e8c2db5a4e9d5047a14114b63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialPlayerSpeed: 4
+  initialPlayerSpeed: 0.1
   maximumPlayerSpeed: 30
   playerSpeedIncreaseRate: 0.05
   jumpHeight: 1
@@ -1926,10 +1926,10 @@ MonoBehaviour:
   slideAnimationClip: {fileID: 7400000, guid: 839c72530968a8841ac49ddfcf1e31c7, type: 2}
   gameOverlay: {fileID: 1067341567}
   ratAudio: {fileID: 1982780086}
-  slideSound: {fileID: 8300000, guid: 57af0d0490bbaf14887d0b64232ce4eb, type: 3}
-  jumpSound: {fileID: 8300000, guid: 45f37e51f8b40574795a442f71d26e81, type: 3}
-  leftSound: {fileID: 8300000, guid: a1e71c1d43ad6dd4cab4177dfb5056e3, type: 3}
-  rightSound: {fileID: 8300000, guid: fd33ca21010930c458f43081d24da804, type: 3}
+  slideSound: {fileID: 8300000, guid: b530fd6d5eae7104aac3e299ca1444a9, type: 3}
+  jumpSound: {fileID: 8300000, guid: cb5f8222c9b24d3408135961860927ce, type: 3}
+  leftSound: {fileID: 8300000, guid: 39e1fb991203a44458b0c10776b4c08c, type: 3}
+  rightSound: {fileID: 8300000, guid: ce7cb817043cd63409ff527efb8141d0, type: 3}
   playerSpeed: 0
   gravity: 0
   turnEvent:
