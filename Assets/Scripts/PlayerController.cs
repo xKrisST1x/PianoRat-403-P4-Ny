@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,9 +28,26 @@ namespace PianoRun.Player {
         [SerializeField]
         private Animator animator;
         [SerializeField]
+        private Animator ratAnimator;
+        [SerializeField]
         private AnimationClip slideAnimationClip;
+        [SerializeField]
+        GameObject gameOverlay;
+        
+        [SerializeField]
+        AudioSource ratAudio;
+        [SerializeField]
+        AudioClip slideSound;
+        [SerializeField]
+        AudioClip jumpSound;
+        [SerializeField]
+        AudioClip leftSound;
+        [SerializeField]
+        AudioClip rightSound;
 
+        [SerializeField]
         private float playerSpeed;
+        [SerializeField]
         private float gravity;
         private Vector3 movementDirection = Vector3.forward;
         private Vector3 playerVelocity;
@@ -49,6 +66,37 @@ namespace PianoRun.Player {
         [SerializeField]
         private UnityEvent<Vector3> turnEvent;
 
+        float turnFloat;
+
+        float C1; // 48 -
+        float Cs1; // 49
+        float D1; // 50
+        float Ds1; // 51
+        float E1; // 52 -
+        float F1; // 53
+        float Fs1; // 54
+        float G1; // 55 -
+        float Gs1; // 56
+        float A1; // 57 +
+        float As1; // 58
+        float B1; // 59
+
+        float C2; // 60 +
+        float Cs2; // 61
+        float D2; // 62
+        float Ds2; // 63
+        float E2; // 64 +
+        float F2; // 65
+        float Fs2; // 66
+        float G2; // 67
+        float Gs2; // 68
+        float A2; // 69
+        float As2; // 70
+        float B2; // 71
+
+        float C3; // 72
+
+        // Se om der er noget der skal ændres/fjernes?
         private void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
@@ -61,6 +109,7 @@ namespace PianoRun.Player {
             slideAction = playerInput.actions["Slide"];
         }
 
+        // Fjernes?
         private void OnEnable()
         {
             turnAction.performed += PlayerTurn;
@@ -68,6 +117,7 @@ namespace PianoRun.Player {
             jumpAction.performed += PlayerJump;
         }
 
+        // Fjernes?
         private void OnDisable()
         {
             turnAction.performed -= PlayerTurn;
@@ -77,10 +127,13 @@ namespace PianoRun.Player {
 
         private void Start()
         {
+            Time.timeScale = 1f;
+
             playerSpeed = initialPlayerSpeed;
             gravity = initialGravityValue;
         }
 
+        // Fjernes?
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             Vector3? turnPosition = CheckTurn(context.ReadValue<float>());
@@ -94,19 +147,20 @@ namespace PianoRun.Player {
             Turn(context.ReadValue<float>(), turnPosition.Value);
         }
 
-        private void PlayerChordTurn(float turnValue)
+        private void PlayerChordTurn(float turnFloat)
         {
-            Vector3? turnPosition = CheckTurn(turnValue);
+            Vector3? turnPosition = CheckTurn(turnFloat);
             if (!turnPosition.HasValue)
             {
                 return;
             }
-            Vector3 targetDirection = Quaternion.AngleAxis(90 * turnValue, Vector3.up) *
+            Vector3 targetDirection = Quaternion.AngleAxis(90 * turnFloat, Vector3.up) *
             movementDirection;
             turnEvent.Invoke(targetDirection);
-            Turn(turnValue, turnPosition.Value);
+            Turn(turnFloat, turnPosition.Value);
         }
 
+        // Se om der er noget der skal ændres/fjernes?
         private Vector3? CheckTurn(float turnValue) // questionmark is called "nullable" and means that it can either be Vector3 or null.
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, .1f, turnLayer); // creates a sphere that checks if we are  overlapping with ant other colliders.
@@ -124,6 +178,7 @@ namespace PianoRun.Player {
             return null;
         }
 
+        // Se om der er noget der skal ændres/fjernes?
         private void Turn(float turnValue, Vector3 turnPosition)
         {
             Vector3 tempPlayerPosition = new Vector3(turnPosition.x, transform.position.y, turnPosition.z);
@@ -136,7 +191,7 @@ namespace PianoRun.Player {
             movementDirection = transform.forward.normalized;
         }
 
-
+        // Fjernes?
         private void PlayerSlide(InputAction.CallbackContext context)
         {
             if (!sliding && IsGrounded())
@@ -157,13 +212,15 @@ namespace PianoRun.Player {
 
             // plays slide animation
             animator.Play(slidingAnimationId);
-            yield return new WaitForSeconds(slideAnimationClip.length);
+            ratAnimator.Play("Sliding");
+            yield return new WaitForSeconds(slideAnimationClip.length / animator.speed);
             // sets the character controller collider back to normal after sliding
             controller.height *= 2;
             controller.center = originalControllerCenter;
             sliding = false;
         }
 
+        // Fjernes?
         private void PlayerJump(InputAction.CallbackContext context)
         {
             if (IsGrounded())
@@ -175,6 +232,34 @@ namespace PianoRun.Player {
 
         private void Update()
         {
+            C1 = MidiMaster.GetKey(48);
+            Cs1 = MidiMaster.GetKey(49);
+            D1 = MidiMaster.GetKey(50);
+            Ds1 = MidiMaster.GetKey(51);
+            E1 = MidiMaster.GetKey(52);
+            F1 = MidiMaster.GetKey(53);
+            Fs1 = MidiMaster.GetKey(54);
+            G1 = MidiMaster.GetKey(55);
+            Gs1 = MidiMaster.GetKey(56);
+            A1 = MidiMaster.GetKey(57);
+            As1 = MidiMaster.GetKey(58);
+            B1 = MidiMaster.GetKey(59);
+
+            C2 = MidiMaster.GetKey(60);
+            Cs2 = MidiMaster.GetKey(61);
+            D2 = MidiMaster.GetKey(62);
+            Ds2 = MidiMaster.GetKey(63);
+            E2 = MidiMaster.GetKey(64);
+            F2 = MidiMaster.GetKey(65);
+            Fs2 = MidiMaster.GetKey(66);
+            G2 = MidiMaster.GetKey(67);
+            Gs2 = MidiMaster.GetKey(68);
+            A2 = MidiMaster.GetKey(69);
+            As2 = MidiMaster.GetKey(70);
+            B2 = MidiMaster.GetKey(71);
+
+            C3 = MidiMaster.GetKey(72);
+
             controller.Move(transform.forward * playerSpeed * Time.deltaTime);
 
             if (IsGrounded() && playerVelocity.y < 0)
@@ -187,17 +272,55 @@ namespace PianoRun.Player {
             if (playerSpeed < maximumPlayerSpeed)
             {
                 playerSpeed += Time.deltaTime * playerSpeedIncreaseRate;
+                gravity = initialGravityValue - playerSpeed;
+
+                if (animator.speed < 1.25f)
+                {
+                    animator.speed += (1 / playerSpeed) * Time.deltaTime;
+                    ratAnimator.speed += (1 / playerSpeed) * Time.deltaTime;
+                }
             }
 
-            // PlayerChordTurn Left
-            if (Input.GetKeyDown("q"))
+            if (C1 > 0.0f && E1 > 0.0f && G1 > 0.0f) // C chord, Left
             {
-                PlayerChordTurn(-1f);
+                ratAudio.PlayOneShot(leftSound);
+                turnFloat = -1f;
+            }
+            else if (A1 > 0.0f && C2 > 0.0f && E2 > 0.0f) // Am chord, Right
+            {
+                ratAudio.PlayOneShot(rightSound);
+                turnFloat = 1f;
+            }
+            else
+            {
+                turnFloat = 0f;
             }
 
-            if (Input.GetKeyDown("e"))
+            if (MidiMaster.GetKeyDown(48) || MidiMaster.GetKeyDown(52) || MidiMaster.GetKeyDown(55) 
+            || MidiMaster.GetKeyDown(57) || MidiMaster.GetKeyDown(60) || MidiMaster.GetKeyDown(64))
             {
-                PlayerChordTurn(1f);
+                if (turnFloat != 0f)
+                {
+                    PlayerChordTurn(turnFloat);
+                }
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            // F chord, Jump
+            if (F1 > 0.0f && A1 > 0.0f && C2 > 0.0f && IsGrounded())
+            {
+                ratAudio.PlayOneShot(jumpSound);
+                playerVelocity.y += Mathf.Sqrt(jumpHeight * gravity * -3f);
+                controller.Move(playerVelocity * Time.deltaTime);
+            }
+
+            // G chord, slide
+            if (G1 > 0.0f && B1 > 0.0f && D2 > 0.0f && !sliding && IsGrounded())
+            {
+                ratAudio.PlayOneShot(slideSound);
+                StartCoroutine(Slide());
             }
         }
 
@@ -221,6 +344,15 @@ namespace PianoRun.Player {
             }
             return false;
 
+        }
+
+        void OnControllerColliderHit(ControllerColliderHit hit)
+        {
+            if (hit.gameObject.tag == "GameOver") 
+            {
+                Time.timeScale = 0;
+                gameOverlay.SetActive(true);
+            }
         }
     }
 }
