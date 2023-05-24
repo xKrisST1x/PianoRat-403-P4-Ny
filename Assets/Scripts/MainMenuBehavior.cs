@@ -10,22 +10,12 @@ public class MainMenuBehavior : MonoBehaviour
 
     void Update()
     {
-        StartDance();
-    }
-
-    void StartDance()
-    {
         ratAnim.Play("Dance");
     }
 
     public void PlayButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void SettingsButton()
-    {
-        // Hide/unhide Settings overlay
     }
 
     public void QuitButton()

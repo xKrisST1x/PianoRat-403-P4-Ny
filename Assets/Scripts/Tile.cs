@@ -1,5 +1,7 @@
 using UnityEngine;
 
+// Script is based on the following YouTube video by samyam:
+// https://youtu.be/jvUvUkYeE3k
 
 namespace PianoRun {
 
@@ -8,13 +10,9 @@ public enum TileType {
     LEFT,
     RIGHT,
     SIDEWAYS
-    //STRAIGHTJUMPTEST,
-    //STRAIGHTSLIDETEST
 }
 
-/// <summary>
-/// Defines the attributes of a tile.
-/// </summary>
+// Defines the attributes of a tile.
 public class Tile : MonoBehaviour
 {
     public TileType type;

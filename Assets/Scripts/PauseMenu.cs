@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script is based on the following YouTube video by Brackeys:
+// https://youtu.be/JivuXdrIHK0
+
 public class PauseMenu : MonoBehaviour
 {
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
 
-    // Update is called once per frame
     void Update()
     {
         //KeyCode.Escape er hvilket knap man trykker for at pause spillet

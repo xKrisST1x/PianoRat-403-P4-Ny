@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
+// Script is based on the following YouTube video by Brackeys:
+// https://youtu.be/YOaYQrN1oYQ
+
 public class SettingsBehavior : MonoBehaviour
 {
     public AudioMixer audioMixer;

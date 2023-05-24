@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Script is bas on the following Youtube videos by Jimmy Vegas:
+// https://youtu.be/ScxN04YeDj8?list=PLZ1b66Z1KFKit4cSry_LWBisrSbVkEF4t
+// https://youtu.be/B0KrgdkEk7M?list=PLZ1b66Z1KFKit4cSry_LWBisrSbVkEF4t
+
 public class Distance : MonoBehaviour
 {
     public GameObject disDisplay;
@@ -27,5 +31,3 @@ public class Distance : MonoBehaviour
         addingDis = false;
     }
 }
-
-// Youtube link used for this code https://www.youtube.com/watch?v=B0KrgdkEk7M&list=PLZ1b66Z1KFKit4cSry_LWBisrSbVkEF4t&index=10

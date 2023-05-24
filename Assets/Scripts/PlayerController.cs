@@ -5,6 +5,9 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 using MidiJack;
 
+// Script is based on the following YouTube video by samyam:
+// https://youtu.be/jvUvUkYeE3k
+
 namespace PianoRun.Player {
 
     [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
@@ -96,7 +99,6 @@ namespace PianoRun.Player {
 
         float C3; // 72
 
-        // Se om der er noget der skal ændres/fjernes?
         private void Awake()
         {
             playerInput = GetComponent<PlayerInput>();
@@ -109,7 +111,6 @@ namespace PianoRun.Player {
             slideAction = playerInput.actions["Slide"];
         }
 
-        // Fjernes?
         private void OnEnable()
         {
             turnAction.performed += PlayerTurn;
@@ -117,7 +118,6 @@ namespace PianoRun.Player {
             jumpAction.performed += PlayerJump;
         }
 
-        // Fjernes?
         private void OnDisable()
         {
             turnAction.performed -= PlayerTurn;
@@ -133,7 +133,6 @@ namespace PianoRun.Player {
             gravity = initialGravityValue;
         }
 
-        // Fjernes?
         private void PlayerTurn(InputAction.CallbackContext context)
         {
             Vector3? turnPosition = CheckTurn(context.ReadValue<float>());
@@ -160,7 +159,7 @@ namespace PianoRun.Player {
             Turn(turnFloat, turnPosition.Value);
         }
 
-        // Se om der er noget der skal ændres/fjernes?
+
         private Vector3? CheckTurn(float turnValue) // questionmark is called "nullable" and means that it can either be Vector3 or null.
         {
             Collider[] hitColliders = Physics.OverlapSphere(transform.position, .1f, turnLayer); // creates a sphere that checks if we are  overlapping with ant other colliders.
@@ -178,7 +177,6 @@ namespace PianoRun.Player {
             return null;
         }
 
-        // Se om der er noget der skal ændres/fjernes?
         private void Turn(float turnValue, Vector3 turnPosition)
         {
             Vector3 tempPlayerPosition = new Vector3(turnPosition.x, transform.position.y, turnPosition.z);
@@ -191,7 +189,6 @@ namespace PianoRun.Player {
             movementDirection = transform.forward.normalized;
         }
 
-        // Fjernes?
         private void PlayerSlide(InputAction.CallbackContext context)
         {
             if (!sliding && IsGrounded())
@@ -220,7 +217,6 @@ namespace PianoRun.Player {
             sliding = false;
         }
 
-        // Fjernes?
         private void PlayerJump(InputAction.CallbackContext context)
         {
             if (IsGrounded())
@@ -333,9 +329,6 @@ namespace PianoRun.Player {
             Vector3 raycastOriginSecond = raycastOriginFirst;
             raycastOriginFirst -= transform.forward * .2f;
             raycastOriginSecond += transform.forward * .2f;
-
-            //Debug.DrawLine(raycastOriginFirst, Vector3.down, Color.green, 2f);
-            //Debug.DrawLine(raycastOriginSecond, Vector3.down, Color.red, 2f);
 
             if (Physics.Raycast(raycastOriginFirst, Vector3.down, out RaycastHit hit, length, groundLayer) ||
             Physics.Raycast(raycastOriginSecond, Vector3.down, out RaycastHit hit2, length, groundLayer))

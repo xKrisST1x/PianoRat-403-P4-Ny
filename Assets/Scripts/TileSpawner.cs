@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Script is based on the following YouTube video by samyam:
+// https://youtu.be/jvUvUkYeE3k
+
 namespace PianoRun
 {
 
