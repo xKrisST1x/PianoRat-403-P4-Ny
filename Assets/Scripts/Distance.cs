@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Script is bas on the following Youtube videos by Jimmy Vegas:
+// Script is based on the following Youtube videos by Jimmy Vegas:
 // https://youtu.be/ScxN04YeDj8?list=PLZ1b66Z1KFKit4cSry_LWBisrSbVkEF4t
 // https://youtu.be/B0KrgdkEk7M?list=PLZ1b66Z1KFKit4cSry_LWBisrSbVkEF4t
 
