@@ -37,7 +37,8 @@ public class TileSpawner : MonoBehaviour
 
     for (int i = 0; i < tileStartCount; ++i)
     {
-        SpawnTile(SelectRandomGameObjectFromList(startingTile).GetComponent<Tile>());
+                //SpawnTile(SelectRandomGameObjectFromList(startingTile).GetComponent<Tile>());
+                SpawnTile(startingTile[0].GetComponent<Tile>());
     }
 
     SpawnTile(SelectRandomGameObjectFromList(turnTiles).GetComponent<Tile>());
