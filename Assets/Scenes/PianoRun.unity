@@ -1469,7 +1469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2653f0020243dc849b9017edb95fa9d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileStartCount: 2
+  tileStartCount: 3
   minimunStraightTile: 3
   maximumStraightTile: 7
   startingTile:
